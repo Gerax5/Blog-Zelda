@@ -1,0 +1,47 @@
+.Card{
+    background-color: #ec9e51;
+    border-radius: 5%;
+    height: 80%;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    margin-left: 2%;
+}
+
+.imageCard{
+    width: 100%;
+    height: 100%;
+    object-fit: "contain",
+}
+
+.containerImageCard{
+    background-color: #fbf1e9;
+    height: 100%;
+    width: 60%;
+}
+
+.containerDataCard{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titleCard{
+    font-size: 40px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+}
+
+.containerTitleGame{
+    
+    width: 80%;
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
