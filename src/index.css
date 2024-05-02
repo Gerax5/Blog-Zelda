@@ -1,0 +1,13 @@
+body{
+  background-color: beige;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  background-image: url('https://www.xtrafondos.com/wallpapers/the-legend-of-zelda-breath-of-the-wild-4066.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  backdrop-filter: blur(5px);
+}
