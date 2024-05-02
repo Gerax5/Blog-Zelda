@@ -11,6 +11,9 @@ function App() {
   //Characters
   const [characters, setCharacters] = useState([])
   const [activeIndexCharacters,setActiveIndexCharacters] = useState(0)
+  //Objects
+  const [objects, setObjects] = useState([])
+  const [activeIndexObject, setActiveIndexObject] = useState(0)
 
   //Data Games
   useEffect(() =>{
@@ -94,6 +97,56 @@ function App() {
     });
   };
 
+  //Objects
+  useEffect(() =>{
+    const fetchObjects =  async () =>{
+      try {
+        let api = await fetch('http://127.0.0.1:3000/object')
+        let object = await api.json()
+        setObjects(object)
+        console.log(objects)
+      } catch (error) {
+        console.error("eerrror",error)
+      }
+    }
+
+    fetchObjects()
+  })
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndexObject(prevIndex => {
+        if (prevIndex + 3 >= objects.length) {
+          return 0;
+        } else {
+          return prevIndex + 1;
+        }
+      });
+    }, 5000);
+  
+    return () => clearInterval(interval);
+  }, [objects.length]);
+
+  const nextObject = () => {
+    setActiveIndexObject(prevIndex => {
+      if (prevIndex + 3 >= objects.length) {
+        return 0;
+      } else {
+        return prevIndex + 1;
+      }
+    });
+  };
+
+  const prevObject = () => {
+    setActiveIndexObject(prevIndex => {
+      if (prevIndex === 0) {
+        return objects.length - 3;
+      } else {
+        return prevIndex - 1;
+      }
+    });
+  };
+
   return (
     <div className='contanerTotal'>
       <div className='Principal'>
@@ -121,6 +174,22 @@ function App() {
           ))}
           <button onClick={nextCharacter} className='btnSiguiente' style={{backgroundColor:"#494949", color:"white"}}>Siguiente</button>
         </div> 
+      </div>
+      <div className='containerObjects'>
+        <h1 className='TituloJuegos'>Objetos</h1>
+        <div className='whiteLine'></div>
+        <div className='containerGames' style={{marginLeft:"5%", justifyContent:"space-around"}}>
+          <button onClick={prevObject} className='btnAnterior'>Anterior</button>
+          {objects.slice(activeIndexObject, activeIndexObject + 3).map(object => (
+            <CardCharacters 
+              image={object.img_object} 
+              name={object.name_object} 
+              background={'#ec9e51'} 
+              borderColor={'#494949'}
+              marginTopImage={'20%'}/>
+          ))}
+          <button onClick={nextObject} className='btnSiguiente'>Siguiente</button>
+        </div>
       </div>
     </div>
   )
