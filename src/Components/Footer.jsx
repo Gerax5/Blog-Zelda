@@ -1,9 +1,11 @@
 import './Footer.css'
 
-const Footer = ()=>{
+const Footer = ({marginTop})=>{
     return (
-        <div className="Footer">
-
+        <div className="Footer" style={{marginTop:marginTop}}>
+            Informacion
         </div>
     )
 }
+
+export default Footer
