@@ -1,7 +1,7 @@
 import { useState, useEffect} from 'react'
-import './App.css'
-import Card from './Components/Card'
-import CardCharacters from './Components/CardCharacters'
+import '../../App.css'
+import Card from '../../Components/Card'
+import CardCharacters from '../../Components/CardCharacters'
 
 
 const MainScreen = () =>{
@@ -174,7 +174,9 @@ const MainScreen = () =>{
             <CardCharacters 
               image={character.img_character} 
               name={character.name_character}
-              id={character.id_character}/>
+              id={character.id_character}
+              tipo={"Character"}
+              />
           ))}
           <button onClick={nextCharacter} className='btnSiguiente' style={{backgroundColor:"#494949", color:"white"}}>Siguiente</button>
         </div> 
@@ -188,9 +190,12 @@ const MainScreen = () =>{
             <CardCharacters 
               image={object.img_object} 
               name={object.name_object} 
+              id={object.id_object}
               background={'#ec9e51'} 
               borderColor={'#494949'}
-              marginTopImage={'20%'}/>
+              marginTopImage={'20%'}
+              tipo={"Object"}
+              />
           ))}
           <button onClick={nextObject} className='btnSiguiente'>Siguiente</button>
         </div>

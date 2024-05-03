@@ -23,7 +23,7 @@ function App() {
       setVisibleFooter(true)
     }
 
-    if(window.location.pathname.includes("/Character")){
+    if(window.location.pathname.includes("/Character") || window.location.pathname.includes("/Object")){
       setMarginTop("45%")
     }
     console.log(window.location.pathname)
