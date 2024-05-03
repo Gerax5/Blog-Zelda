@@ -2,6 +2,7 @@ import { useState, useEffect} from 'react'
 import '../../App.css'
 import Card from '../../Components/Card'
 import CardCharacters from '../../Components/CardCharacters'
+import useApi from '../../Hooks/useApi'
 
 
 const MainScreen = () =>{
@@ -16,20 +17,27 @@ const MainScreen = () =>{
   const [activeIndexObject, setActiveIndexObject] = useState(0)
 
   //Data Games
+  const options = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  const {data:gamesData, isLoading:gamesLoading, error:gamesError} = useApi('http://127.0.0.1:3000/games',options)
+
   useEffect(() =>{
-    const fetchGames = async () => {
-        try {
-          let api = await fetch('http://127.0.0.1:3000/games')
-          let games = await api.json()
-          setCards(games)
-          console.log(cards)
-        } catch (error) {
-          console.error("eerrror",error)
-        }
+    
+    if(gamesError){
+      console.log("Error",gamesError)
     }
 
-    fetchGames();
-  }, [])
+    if(!gamesLoading){
+      if(gamesData){
+        setCards(gamesData)
+        console.log(cards)
+      }
+    }
+
+  }, [gamesData, gamesLoading, gamesError])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -48,20 +56,21 @@ const MainScreen = () =>{
   };
 
   //Data Characters
+  const {data:characterData, isLoading:CharacterLoading, error:CharacterError} = useApi('http://127.0.0.1:3000/character',options)
+
   useEffect(() =>{
-    const fetchCharacters = async () =>{
-      try {
-        let api = await fetch('http://127.0.0.1:3000/character')
-        let character = await api.json()
-        setCharacters(character)
-        console.log(characters)
-      } catch (error) {
-        console.error("eerrror",error)
+    if(CharacterError){
+      console.log("Error",CharacterError)
+    }
+
+    if(!CharacterLoading){
+      if(characterData){
+        setCharacters(characterData)
+        console.log(cards)
       }
     }
 
-    fetchCharacters()
-  },[])
+  },[characterData, CharacterLoading, CharacterError])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -98,20 +107,20 @@ const MainScreen = () =>{
   };
 
   //Objects
+  const {data:ObjectData, isLoading:ObjectLoading, error:ObjectError} = useApi('http://127.0.0.1:3000/object',options)
+  
   useEffect(() =>{
-    const fetchObjects =  async () =>{
-      try {
-        let api = await fetch('http://127.0.0.1:3000/object')
-        let object = await api.json()
-        setObjects(object)
-        console.log(objects)
-      } catch (error) {
-        console.error("eerrror",error)
-      }
+    if(ObjectError){
+      console.log("Error",ObjectError)
     }
 
-    fetchObjects()
-  }, [])
+    if(!ObjectLoading){
+      if(ObjectData){
+        setObjects(ObjectData)
+        console.log(cards)
+      }
+    }
+  }, [ObjectData, ObjectLoading, ObjectError])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -154,7 +163,7 @@ const MainScreen = () =>{
           <div className='whiteLine'></div>
           <div className='containerGames'>
             <button onClick={prevCard} className='btnAnterior'>Anterior</button>
-                {cards.length > 0 && (
+                {gamesLoading == false  && cards[activeIndex] && (
                   <Card
                     Image={cards[activeIndex].img_game}
                     releaseDate={cards[activeIndex].date_released_game.year}
@@ -170,7 +179,7 @@ const MainScreen = () =>{
         <div className='whiteLine'></div>
         <div className='containerGames' style={{marginLeft:"5%", justifyContent:"space-around"}}>
           <button onClick={prevCharacter} className='btnAnterior' style={{backgroundColor:"#494949", color:"white"}}>Anterior</button>
-          {characters.slice(activeIndexCharacters, activeIndexCharacters + 3).map(character => (
+          {cards[activeIndex] && characters.slice(activeIndexCharacters, activeIndexCharacters + 3).map(character => (
             <CardCharacters 
               image={character.img_character} 
               name={character.name_character}

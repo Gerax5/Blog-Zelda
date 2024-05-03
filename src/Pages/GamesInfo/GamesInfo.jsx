@@ -4,6 +4,7 @@ import './GamesInfo.css'
 const GamesInfo = ({id}) =>{
 
     const [gameData, setGameData] = useState(null)
+    const [admin, setAdmin] = useState()
 
     useEffect(() =>{
         const fetchGames =  async () =>{
