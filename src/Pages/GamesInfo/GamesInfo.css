@@ -38,3 +38,10 @@
     flex-direction: column;
     align-items: center;
 }
+
+.btnEdit{
+    height:10%; 
+    width:90%;
+    margin-top:20%;
+    background-color: #ec9e51;
+}

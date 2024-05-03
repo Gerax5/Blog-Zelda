@@ -1,46 +1,44 @@
 import { useEffect, useState } from 'react'
 import './GamesInfo.css'
+import useApi from '../../Hooks/useApi'
+import useAdmin from '../../Hooks/useAdmin';
 
 const GamesInfo = ({id}) =>{
+    const options = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+    };
 
-    const [gameData, setGameData] = useState(null)
-    const [admin, setAdmin] = useState()
+    const {data, isLoading, error } = useApi(`http://127.0.0.1:3000/games/${id}`,options)
 
-    useEffect(() =>{
-        const fetchGames =  async () =>{
-            console.log('ID',id)
-          try {
-            let api = await fetch(`http://127.0.0.1:3000/games/${id}`)
-            let game = await api.json()
-            setGameData(game)
-          } catch (error) {
-            console.error("eerrror",error)
-          }
-        }
-    
-        fetchGames()
-      }, [])
+    const isAdmin = useAdmin()
 
-    if (!gameData) {
+
+    if (!data) {
         return <div>Cargando...</div>;
     }else{
-        console.log(gameData)
+        console.log(data)
     }
 
     return (
         <div className='GamesContainer'>
             <div className='GamesImage'>
-                <img src={gameData[0].img_game} className="GamesImg" alt="Zelda Shield Logo" />
+                <img src={data[0].img_game} className="GamesImg" alt="Zelda Shield Logo" />
             </div>
             <div className='GameInfo'>
-                <h1>{gameData[0].name_game}</h1>
-                <h2 style={{height:"5%"}} className='containerTextGame'>Release Date: {gameData[0].date_released_game.day}/{gameData[0].date_released_game.month}/{gameData[0].date_released_game.year}</h2>
+                <h1>{data[0].name_game}</h1>
+                <h2 style={{height:"5%"}} className='containerTextGame'>Release Date: {data[0].date_released_game.day}/{data[0].date_released_game.month}/{data[0].date_released_game.year}</h2>
                 <h2 style={{height:"5%"}} className='containerTextGame'>Acerca de:</h2>
                 <div className='containerTextGame'>
-                    <p>{gameData[0].content_games}</p>
+                    <p>{data[0].content_games}</p>
                 </div>
-                
             </div>
+            {isAdmin && (
+                <div style={{height:"90%", width:"10%", backgroundColor:"whitesmoke", display:"flex", flexDirection:"column",alignItems:"center"}}>
+                    <button className='btnEdit'>Actualizar</button>
+                    <button className='btnEdit'>Eliminar</button>
+                </div>
+            )}
         </div>
     )
 }

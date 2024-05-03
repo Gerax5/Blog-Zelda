@@ -1,38 +1,34 @@
 import React, {useState, useEffect} from 'react';
 import './Login.css'
+import useApi from '../../Hooks/useApi';
 
 const Login = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [options, setOptions] = useState(null);
 
-    const validateLogin = async () =>{
-        try {
-            const response = await fetch("http://127.0.0.1:3000/login", {
-                method: 'POST',
-                headers:{
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: username,
-                    password: password
-                })
-            })
-            const data = await response.json();
-            console.log('Respuesta del servidor:', data);
-            if(response.ok && data.token){
-                console.log("ENTRO aqui")
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('sesionActiva', 'true');
-                location.reload()
-            }else{
-                alert("Crendenciales Incorrectas")
-            }
-        } catch (error) {
-            alert('Login fallido: ' + data.message);
-            console.error("eerrror",error)
-        }
+    const {data, isLoading, error } = useApi(options ? 'http://127.0.0.1:3000/login': null, options)
+
+    const validateLogin = () =>{
+        setOptions({
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: username, password: password}),
+        });
     }
+
+    useEffect(() => {
+        if(error){
+          alert("Credenciales incorrectas")
+        }
+    
+        if(data){
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('sesionActiva', 'true');
+          location.reload()
+        }
+    }, [data, error]);
 
 
     return (

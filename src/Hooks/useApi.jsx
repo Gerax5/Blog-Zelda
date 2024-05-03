@@ -7,24 +7,26 @@ function useApi(url, options) {
   
     useEffect(() => {
       const fetchData = async () => {
-        setIsLoading(true);
-        try {
-          const response = await fetch(url, options);
-          if (!response.ok) {
-            throw new Error(`Error: ${response.status}`);
-          }
-          const data = await response.json();
-          setData(data);
-          console.log(data)
-          setError(null);
-        } catch (error) {
-          setError(error.message);
-        } finally {
-          setIsLoading(false);
+        if(options){
+            setIsLoading(true);
+            try {
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
+            const data = await response.json();
+            setData(data);
+            console.log(data)
+            setError(null);
+            } catch (error) {
+            setError(error.message);
+            } finally {
+            setIsLoading(false);
+            }
         }
-      };
-  
-      fetchData();
+        };
+    
+        fetchData();
     }, [url, JSON.stringify(options)]);
   
     return { data, isLoading, error };
