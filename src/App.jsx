@@ -11,6 +11,7 @@ import BackgroundImage from './Components/BackgroundImage.jsx'
 function App() {
   const [rutaActual, setRutaActual] = useState("app")
   const [visibleFooter, setVisibleFooter] = useState(true)
+  const [marginTop, setMarginTop] = useState("120%")
 
   useEffect(()=>{
     if(window.location.pathname == "/"){
@@ -20,6 +21,10 @@ function App() {
       setVisibleFooter(false)
     }else{
       setVisibleFooter(true)
+    }
+
+    if(window.location.pathname.includes("/Character")){
+      setMarginTop("45%")
     }
     console.log(window.location.pathname)
     setRutaActual(window.location.pathname)
@@ -31,7 +36,7 @@ function App() {
       <BackgroundImage imageUrl="https://www.xtrafondos.com/wallpapers/the-legend-of-zelda-breath-of-the-wild-4066.jpg">
         <Router ruta={rutaActual}></Router>
         {visibleFooter && (
-        <Footer marginTop={"120%"}></Footer>
+        <Footer marginTop={marginTop}></Footer>
         )}
         
       </BackgroundImage>

@@ -159,6 +159,7 @@ const MainScreen = () =>{
                     Image={cards[activeIndex].img_game}
                     releaseDate={cards[activeIndex].date_released_game.year}
                     titleGame={cards[activeIndex].name_game}
+                    id={cards[activeIndex].id_game}
                   />
                 )}
             <button onClick={nextCard} className='btnSiguiente'>Siguiente</button>
@@ -170,7 +171,10 @@ const MainScreen = () =>{
         <div className='containerGames' style={{marginLeft:"5%", justifyContent:"space-around"}}>
           <button onClick={prevCharacter} className='btnAnterior' style={{backgroundColor:"#494949", color:"white"}}>Anterior</button>
           {characters.slice(activeIndexCharacters, activeIndexCharacters + 3).map(character => (
-            <CardCharacters image={character.img_character} name={character.name_character}/>
+            <CardCharacters 
+              image={character.img_character} 
+              name={character.name_character}
+              id={character.id_character}/>
           ))}
           <button onClick={nextCharacter} className='btnSiguiente' style={{backgroundColor:"#494949", color:"white"}}>Siguiente</button>
         </div> 

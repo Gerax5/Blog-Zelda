@@ -7,7 +7,7 @@ function Header(){
                 <div className='containerImage'>
                     <img src="https://w7.pngwing.com/pngs/539/749/png-transparent-shield-hylian-princess-zelda-art-shield-emblem-logo-video-game.png"  className="image" alt="Zelda Shield Logo" />
                 </div>
-                <p className='titleZelda'>Blog Zelda</p>
+                <a href='/Home' className='titleZelda'>Blog Zelda</a>
             </div>
             
         </div>

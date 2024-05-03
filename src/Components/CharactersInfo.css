@@ -1,0 +1,17 @@
+.ContainerInfoCh{
+    background-color: #337A93;
+    align-self: center;
+    margin-top: 8%;
+    height: 70%;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.imageCharacter{
+    background-color: aqua;
+    height: 70%;
+    width: 20%;
+    margin-left: 5%;
+}
