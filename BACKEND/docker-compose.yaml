@@ -1,0 +1,24 @@
+version: '2'
+name: blog-zelda
+services:
+  mysql:
+    build: ./mysql
+    ports:
+      - "33069:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_USER: blog_user
+      MYSQL_PASSWORD: blog_password
+      MYSQL_DATABASE: blog_zelda
+    volumes:
+        - "mysql-data:/var/lib/mysql"
+  api:
+    build: ./api
+    ports:
+      - "3005:3005"
+    depends_on:
+      - mysql
+
+volumes:
+    mysql-data:
+        driver: "local"
