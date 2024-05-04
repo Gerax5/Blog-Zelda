@@ -1,10 +1,21 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import useAdmin from "../../Hooks/useAdmin"
 import AquiNoHayNada from "../../Components/AquiNoHayNada";
 import './CreatePost.css'
 import useApi from "../../Hooks/useApi";
+import {context} from '../../App'
 
 const CreatePost = () =>{
+
+    const {setMarginTop} = useContext(context)
+
+    useEffect(()=>{
+        setMarginTop("50%")
+        const element = document.querySelector('.backgroundimage');
+        if (element) {
+            element.scrollTo(0, 0);
+        }
+    },[])
     const isAdmin = useAdmin()
     const [tipo, setTipo] = useState('Character')
     const [name, setName] = useState('');
