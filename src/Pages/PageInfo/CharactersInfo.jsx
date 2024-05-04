@@ -2,6 +2,7 @@ import React,{useEffect, useState, useContext} from "react"
 import './CharactersInfo.css'
 import { useParams } from "react-router-dom"
 import {context} from '../../App'
+import useAdmin from "../../Hooks/useAdmin"
 import useApi from "../../Hooks/useApi"
 import { useNavigate } from "react-router-dom";
 
@@ -15,7 +16,7 @@ const CharactersInfo = ({ruta}) =>{
     const [deleteOptions, setDeleteOptions] = useState(null)
     const [key, setKey] = useState('')
 
-    const isAdmin = useApi()
+    const isAdmin = useAdmin()
 
     const {data: delData, isLoading: delisLodiang, error: delError } = useApi(deleteOptions ? `http://127.0.0.1:3000/${ruta}/${id}`: null, deleteOptions)
 

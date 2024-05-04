@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css'
 import useApi from '../../Hooks/useApi';
 
 const Login = () => {
+
+    let navigate = useNavigate()
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -26,6 +29,7 @@ const Login = () => {
         if(data){
           localStorage.setItem('token', data.token);
           localStorage.setItem('sesionActiva', 'true');
+          navigate("/Home")
           location.reload()
         }
     }, [data, error]);
