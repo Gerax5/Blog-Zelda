@@ -34,15 +34,19 @@ const UpdatePost = () =>{
         if(!updateIsLoading){
             if(updateDate){
                 console.log(updateDate[0])
-              setName(tipo == "character" && updateDate[0] ? updateDate[0].name_character : updateDate[0].name_object)
-              setDescription(tipo == "character" && updateDate[0].description_character ? updateDate[0].description_character : updateDate[0].description_object)
+                if(tipo == "games"){
+                    setName(updateDate[0] ? updateDate[0].name_game : '')
+                    setDescription(updateDate[0] ? updateDate[0].content_games: '')
+                    setImage(updateDate[0] ? updateDate[0].img_game : '')
+                    setDate( updateDate[0] ?
+                        `${updateDate[0].date_released_game.year}/${updateDate[0].date_released_game.month}/${updateDate[0].date_released_game.day}`: ''
+                    )
+                }else{
+                    setName(tipo == "character" && updateDate[0] ? updateDate[0].name_character : updateDate[0].name_object)
+                    setDescription(tipo == "character" && updateDate[0].description_character ? updateDate[0].description_character : updateDate[0].description_object)
 
-              setImage(tipo == "character" && updateDate[0] ? updateDate[0].img_character : updateDate[0].img_object)
-              if(tipo == "games"){
-                setDate( updateDate[0] ?
-                    `${updateDate[0].date_released_game.year}/${updateDate[0].date_released_game.month}/${updateDate[0].date_released_game.day}`: ''
-                )
-              }
+                    setImage(tipo == "character" && updateDate[0] ? updateDate[0].img_character : updateDate[0].img_object)
+                }
             }
           }
     },[updateDate,updateIsLoading,updateError])

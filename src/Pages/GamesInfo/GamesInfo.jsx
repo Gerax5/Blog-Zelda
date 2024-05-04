@@ -1,13 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import './GamesInfo.css'
 import useApi from '../../Hooks/useApi'
 import useAdmin from '../../Hooks/useAdmin';
 import { useParams, useNavigate } from 'react-router-dom';
+import {context} from '../../App'
 
 const GamesInfo = () =>{
 
-    let { id } = useParams();
+    let { id } = useParams()
     let navigate = useNavigate()
+    const {setMarginTop} = useContext(context)
+    const [deleteOptions, setDeleteOptions] = useState(null)
+    const [key, setKey] = useState('')
+
+    const {data: delData, isLoading: delisLodiang, error: delError } = useApi(deleteOptions ? `http://127.0.0.1:3000/games/${id}`: null, deleteOptions)
 
     const options = {
         method: 'GET',
@@ -16,13 +22,51 @@ const GamesInfo = () =>{
 
     const {data, isLoading, error } = useApi(`http://127.0.0.1:3000/games/${id}`,options)
 
+    useEffect(()=>{
+        if(delError){
+            console.log("error")
+        }
+
+        if(delData){
+            alert("Se elimino el elemento")
+            navigate("/Home")
+        }
+    },[delData])
+
     const isAdmin = useAdmin()
+
+    useEffect(()=>{
+        setMarginTop("45%")
+        const element = document.querySelector('.backgroundimage');
+        if (element) {
+            element.scrollTo(0, 0);
+        }
+    },[])
+
+    useEffect(()=>{
+        const token = localStorage.getItem('sesionActiva');
+        setKey(token)
+    })
 
 
     if (!data) {
         return <div>Cargando...</div>;
     }else{
         console.log(data)
+    }
+
+    const onHandleUpdateItem = () =>{
+        navigate(`/Update/games/${id}`)
+    }
+
+    const onHandleDeleteItem = () =>{
+        setDeleteOptions({
+            method: 'DELETE',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${key}`
+             }
+        });
     }
 
     return (
@@ -40,8 +84,8 @@ const GamesInfo = () =>{
             </div>
             {isAdmin && (
                 <div style={{height:"90%", width:"10%", display:"flex", flexDirection:"column",alignItems:"center"}}>
-                    <button className='btnEdit'>Actualizar</button>
-                    <button className='btnEdit'>Eliminar</button>
+                    <button className='btnEdit' onClick={onHandleUpdateItem}>Actualizar</button>
+                    <button className='btnEdit' onClick={onHandleDeleteItem}>Eliminar</button>
                 </div>
             )}
         </div>
