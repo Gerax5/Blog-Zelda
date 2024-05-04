@@ -1,9 +1,9 @@
-import React, {useState, useEffect, useContext} from "react";
+import {useState, useEffect, useContext} from "react";
 import useAdmin from "../../Hooks/useAdmin"
 import AquiNoHayNada from "../../Components/AquiNoHayNada";
 import './CreatePost.css'
 import useApi from "../../Hooks/useApi";
-import {context} from '../../App'
+import { context } from "../../Context/context";
 
 const CreatePost = () =>{
 
@@ -15,7 +15,8 @@ const CreatePost = () =>{
         if (element) {
             element.scrollTo(0, 0);
         }
-    },[])
+    },[]) //eslint-disable-line react-hooks/exhaustive-deps
+    
     const isAdmin = useAdmin()
     const [tipo, setTipo] = useState('Character')
     const [name, setName] = useState('');
@@ -29,12 +30,7 @@ const CreatePost = () =>{
         setTipo(event.target.value);
     }
 
-    const redirect = (ruta) =>{
-        window.history.pushState({}, "", ruta);
-        location.reload()
-    }
-
-    const {data, isLoading, error } = useApi(options ? `http://127.0.0.1:3000/${tipo}`: null, options)
+    const {data, error } = useApi(options ? `http://127.0.0.1:3000/${tipo}`: null, options)
 
     const handlePressButton = () =>{
         if(name != '' && description != '' && image != ''){
@@ -59,7 +55,7 @@ const CreatePost = () =>{
     useEffect(()=>{
         const token = localStorage.getItem('sesionActiva');
         setKey(token)
-    })
+    },[])
 
     useEffect(() => {
         if(error){

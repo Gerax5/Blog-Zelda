@@ -1,5 +1,6 @@
 import './Card.css'
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Card = ({Image, titleGame, releaseDate,id}) =>{
 
@@ -7,7 +8,6 @@ const Card = ({Image, titleGame, releaseDate,id}) =>{
     const redirect = (ruta) => {
         navigate(ruta)
     }
-
 
     return (
         <div className="Card" onClick={() => redirect(`/Game/${id}`)}>
@@ -22,6 +22,13 @@ const Card = ({Image, titleGame, releaseDate,id}) =>{
             </div>
         </div>
     )    
+}
+
+Card.propTypes = {
+    Image: PropTypes.string,
+    titleGame: PropTypes.string,
+    releaseDate:PropTypes.string,
+    id:PropTypes.number
 }
 
 export default Card

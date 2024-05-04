@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css'
 import useApi from '../../Hooks/useApi';
@@ -11,7 +11,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [options, setOptions] = useState(null);
 
-    const {data, isLoading, error } = useApi(options ? 'http://127.0.0.1:3000/login': null, options)
+    const {data, error } = useApi(options ? 'http://127.0.0.1:3000/login': null, options)
 
     const validateLogin = () =>{
         setOptions({
@@ -32,7 +32,7 @@ const Login = () => {
           navigate("/Home")
           location.reload()
         }
-    }, [data, error]);
+    }, [data, error]); //eslint-disable-line react-hooks/exhaustive-deps
 
 
     return (

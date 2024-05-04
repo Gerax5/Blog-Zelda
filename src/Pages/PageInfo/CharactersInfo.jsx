@@ -1,10 +1,11 @@
-import React,{useEffect, useState, useContext} from "react"
+import {useEffect, useState, useContext} from "react"
 import './CharactersInfo.css'
 import { useParams } from "react-router-dom"
-import {context} from '../../App'
+import { context } from "../../Context/context"
 import useAdmin from "../../Hooks/useAdmin"
 import useApi from "../../Hooks/useApi"
 import { useNavigate } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 const CharactersInfo = ({ruta}) =>{
 
@@ -18,7 +19,7 @@ const CharactersInfo = ({ruta}) =>{
 
     const isAdmin = useAdmin()
 
-    const {data: delData, isLoading: delisLodiang, error: delError } = useApi(deleteOptions ? `http://127.0.0.1:3000/${ruta}/${id}`: null, deleteOptions)
+    const {data: delData, error: delError } = useApi(deleteOptions ? `http://127.0.0.1:3000/${ruta}/${id}`: null, deleteOptions)
 
     useEffect(()=>{
         if(delError){
@@ -29,7 +30,7 @@ const CharactersInfo = ({ruta}) =>{
             alert("Se elimino el elemento")
             navigate("/Home")
         }
-    },[delData])
+    },[delData]) //eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(()=>{
         setMarginTop("45%")
@@ -37,19 +38,19 @@ const CharactersInfo = ({ruta}) =>{
         if (element) {
             element.scrollTo(0, 0);
         }
-    },[])
+    },[]) //eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(()=>{
         const token = localStorage.getItem('sesionActiva');
         setKey(token)
-    })
+    },[])
 
     const options = {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
     };
 
-    const {data, isLoading, error } = useApi(`http://127.0.0.1:3000/${ruta}/${id}`,options)
+    const {data } = useApi(`http://127.0.0.1:3000/${ruta}/${id}`,options)
 
     const onHandleUpdateItem = () =>{
         navigate(`/Update/${ruta}/${id}`)
@@ -90,6 +91,10 @@ const CharactersInfo = ({ruta}) =>{
             )}
         </div>
     )
+}
+
+CharactersInfo.propTypes = {
+    ruta: PropTypes.string
 }
 
 export default CharactersInfo

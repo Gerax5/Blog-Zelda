@@ -1,14 +1,12 @@
-import { useState, useEffect, createContext} from 'react'
+import { useState} from 'react'
 import './App.css'
-import Card from './Components/Card'
-import CardCharacters from './Components/CardCharacters'
-import Router from './Router/Router'
 import Header from './Components/Header'
 import Footer from './Components/Footer.jsx'
 import BackgroundImage from './Components/BackgroundImage.jsx'
 import AppRouter from './Router/AppRouter.jsx'
+import { context } from './Context/context.jsx'
 
-export const context = createContext();
+
 
 function App() {
   const [visibleFooter, setVisibleFooter] = useState(true)

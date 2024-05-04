@@ -1,9 +1,9 @@
-import React, {useState, useEffect, useContext} from "react";
+import {useState, useEffect, useContext} from "react";
 import useAdmin from "../../Hooks/useAdmin"
 import AquiNoHayNada from "../../Components/AquiNoHayNada";
 import './UpdatePost.css'
 import useApi from "../../Hooks/useApi";
-import {context} from '../../App'
+import { context } from "../../Context/context";
 import { useParams } from "react-router-dom";
 
 const UpdatePost = () =>{
@@ -49,7 +49,7 @@ const UpdatePost = () =>{
                 }
             }
           }
-    },[updateDate,updateIsLoading,updateError])
+    },[updateDate,updateIsLoading,updateError]) //eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(()=>{
         setMarginTop("50%")
@@ -57,10 +57,10 @@ const UpdatePost = () =>{
         if (element) {
             element.scrollTo(0, 0);
         }
-    },[])
+    },[]) //eslint-disable-line react-hooks/exhaustive-deps
     
 
-    const {data, isLoading, error } = useApi(options ? `http://127.0.0.1:3000/${tipo}/${id}`: null, options)
+    const {data, error } = useApi(options ? `http://127.0.0.1:3000/${tipo}/${id}`: null, options)
 
     const handlePressButton = () =>{
         if(name != '' && description != '' && image != ''){
@@ -85,7 +85,7 @@ const UpdatePost = () =>{
     useEffect(()=>{
         const token = localStorage.getItem('sesionActiva');
         setKey(token)
-    })
+    },[])
 
     useEffect(() => {
         if(error){

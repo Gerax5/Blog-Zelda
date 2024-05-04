@@ -3,7 +3,7 @@ import './GamesInfo.css'
 import useApi from '../../Hooks/useApi'
 import useAdmin from '../../Hooks/useAdmin';
 import { useParams, useNavigate } from 'react-router-dom';
-import {context} from '../../App'
+import { context } from '../../Context/context';
 
 const GamesInfo = () =>{
 
@@ -13,14 +13,14 @@ const GamesInfo = () =>{
     const [deleteOptions, setDeleteOptions] = useState(null)
     const [key, setKey] = useState('')
 
-    const {data: delData, isLoading: delisLodiang, error: delError } = useApi(deleteOptions ? `http://127.0.0.1:3000/games/${id}`: null, deleteOptions)
+    const {data: delData, error: delError } = useApi(deleteOptions ? `http://127.0.0.1:3000/games/${id}`: null, deleteOptions)
 
     const options = {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
     };
 
-    const {data, isLoading, error } = useApi(`http://127.0.0.1:3000/games/${id}`,options)
+    const {data} = useApi(`http://127.0.0.1:3000/games/${id}`,options)
 
     useEffect(()=>{
         if(delError){
@@ -31,7 +31,7 @@ const GamesInfo = () =>{
             alert("Se elimino el elemento")
             navigate("/Home")
         }
-    },[delData])
+    },[delData]) //eslint-disable-line react-hooks/exhaustive-deps
 
     const isAdmin = useAdmin()
 
@@ -41,12 +41,12 @@ const GamesInfo = () =>{
         if (element) {
             element.scrollTo(0, 0);
         }
-    },[])
+    },[]) //eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(()=>{
         const token = localStorage.getItem('sesionActiva');
         setKey(token)
-    })
+    },[])
 
 
     if (!data) {

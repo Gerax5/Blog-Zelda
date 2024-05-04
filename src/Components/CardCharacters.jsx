@@ -1,5 +1,6 @@
 import './CardCharacters.css'
 import { useNavigate } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 const CardCharacters = ({image, name, background, borderColor, marginTopImage, id, tipo}) =>{
 
@@ -17,6 +18,16 @@ const CardCharacters = ({image, name, background, borderColor, marginTopImage, i
             <div className='nameCharacter' style={{borderColor:borderColor}}>{name}</div>
         </div>
     )
+}
+
+CardCharacters.propTypes = {
+    image: PropTypes.string,
+    name: PropTypes.string,
+    background: PropTypes.string,
+    borderColor: PropTypes.string,
+    marginTopImage: PropTypes.string,
+    id: PropTypes.number,
+    tipo: PropTypes.string
 }
 
 export default CardCharacters

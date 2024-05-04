@@ -3,7 +3,8 @@ import '../../App.css'
 import Card from '../../Components/Card'
 import CardCharacters from '../../Components/CardCharacters'
 import useApi from '../../Hooks/useApi'
-import { context } from '../../App'
+import { context } from '../../Context/context'
+import PropTypes from 'prop-types';
 
 
 const MainScreen = ({setRuta}) =>{
@@ -16,7 +17,7 @@ const MainScreen = ({setRuta}) =>{
     if (element) {
         element.scrollTo(0, 0);
     }
-  },[])
+  },[]) //eslint-disable-line react-hooks/exhaustive-deps
   
     //Games
   const [activeIndex, setActiveIndex] = useState(0)
@@ -49,7 +50,7 @@ const MainScreen = ({setRuta}) =>{
       }
     }
 
-  }, [gamesData, gamesLoading, gamesError])
+  }, [gamesData, gamesLoading, gamesError]) //eslint-disable-line react-hooks/exhaustive-deps
 
 
   useEffect(() => {
@@ -83,7 +84,7 @@ const MainScreen = ({setRuta}) =>{
       }
     }
 
-  },[characterData, CharacterLoading, CharacterError])
+  },[characterData, CharacterLoading, CharacterError]) //eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -133,7 +134,7 @@ const MainScreen = ({setRuta}) =>{
         console.log(cards)
       }
     }
-  }, [ObjectData, ObjectLoading, ObjectError])
+  }, [ObjectData, ObjectLoading, ObjectError]) //eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -194,6 +195,7 @@ const MainScreen = ({setRuta}) =>{
           <button onClick={prevCharacter} className='btnAnterior' style={{backgroundColor:"#494949", color:"white"}}>Anterior</button>
           {cards[activeIndex] && characters.slice(activeIndexCharacters, activeIndexCharacters + 3).map(character => (
             <CardCharacters 
+              key={character.id_character}
               image={character.img_character} 
               name={character.name_character}
               id={character.id_character}
@@ -211,6 +213,7 @@ const MainScreen = ({setRuta}) =>{
           <button onClick={prevObject} className='btnAnterior'>Anterior</button>
           {objects.slice(activeIndexObject, activeIndexObject + 3).map(object => (
             <CardCharacters 
+              key={object.id_object}
               image={object.img_object} 
               name={object.name_object} 
               id={object.id_object}
@@ -225,6 +228,10 @@ const MainScreen = ({setRuta}) =>{
       </div>
     </div>
   )
+}
+
+MainScreen.propTypes = {
+  setRuta: PropTypes.string
 }
 
 export default MainScreen

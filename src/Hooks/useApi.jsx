@@ -4,6 +4,8 @@ function useApi(url, options) {
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const stringifiedOptions = JSON.stringify(options);
   
     useEffect(() => {
       const fetchData = async () => {
@@ -27,7 +29,7 @@ function useApi(url, options) {
         };
     
         fetchData();
-    }, [url, JSON.stringify(options)]);
+    }, [url, stringifiedOptions]); //eslint-disable-line react-hooks/exhaustive-deps
   
     return { data, isLoading, error };
 }
