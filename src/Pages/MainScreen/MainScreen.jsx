@@ -1,11 +1,23 @@
-import { useState, useEffect} from 'react'
+import { useState, useEffect, useContext} from 'react'
 import '../../App.css'
 import Card from '../../Components/Card'
 import CardCharacters from '../../Components/CardCharacters'
 import useApi from '../../Hooks/useApi'
+import { context } from '../../App'
 
 
 const MainScreen = ({setRuta}) =>{
+
+  const {setMarginTop} = useContext(context)
+
+  useEffect(()=>{
+    setMarginTop("120%")
+    const element = document.querySelector('.backgroundimage');
+    if (element) {
+        element.scrollTo(0, 0);
+    }
+  },[])
+  
     //Games
   const [activeIndex, setActiveIndex] = useState(0)
   const [cards, setCards] = useState([])
@@ -38,6 +50,7 @@ const MainScreen = ({setRuta}) =>{
     }
 
   }, [gamesData, gamesLoading, gamesError])
+
 
   useEffect(() => {
     const interval = setInterval(() => {

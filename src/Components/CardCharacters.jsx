@@ -1,7 +1,7 @@
 import './CardCharacters.css'
 import { useNavigate } from "react-router-dom";
 
-const CardCharacters = ({image, name, background, borderColor, marginTopImage, id, tipo,setRuta}) =>{
+const CardCharacters = ({image, name, background, borderColor, marginTopImage, id, tipo}) =>{
 
     let navigate = useNavigate()
 

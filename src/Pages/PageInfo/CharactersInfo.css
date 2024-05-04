@@ -12,12 +12,14 @@
 .imageContainerCharacter{
     height: 70%;
     width: 20%;
+    background-color: transparent;
     margin-left: 5%;
 }
 
 .imageCharacter{
     width: 100%;
     height: 100%;
+    background-color: transparent;
     object-fit: contain;
 }
 
@@ -36,4 +38,15 @@
     width: 90%;
     font-weight: lighter;
     text-align: justify;
+}
+
+.btnEdit{
+    height:10%; 
+    width:90%;
+    margin-top:20%;
+    background-color: #ec9e51;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 20px;
+    color: #EDEECA;
 }

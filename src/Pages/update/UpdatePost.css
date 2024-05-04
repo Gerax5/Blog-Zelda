@@ -1,0 +1,114 @@
+.Post{
+    background-color: #494949;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-self: center;
+    align-items: center;
+    margin-top: 7%;
+}
+
+.containerData{
+    height: 80%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tipoPost{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 50%;
+    height: 25%;
+}
+
+.description{
+    height: 60%;
+    background-color: #494949;
+    border: 1px solid ;
+    color: #ec9e51;
+}
+
+.subtitlePost{
+    align-self: center;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+.content-select{
+    background-color: #494949;
+    border: 1px solid ;
+    height: 30%;
+    cursor: pointer;
+    color: #ec9e51;
+	max-width: 250px;
+	position: relative;
+    margin-left: 9%;
+}
+
+.inputTextValues{
+    background-color: #494949;
+    color: #ec9e51;
+    border: 1px solid;
+}
+ 
+.content-select select::-ms-expand {
+    display: none;
+}
+
+.content-select select{
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+.content-select select{
+	display: inline-block;
+	width: 100%;
+	cursor: pointer;
+  	padding: 7px 10px;
+  	height: 42px;
+  	outline: 0; 
+  	border: 0;
+	border-radius: 0;
+	background: #f0f0f0;
+	color: #7b7b7b;
+	font-size: 1em;
+	color: #999;
+	font-family: 
+	'Quicksand', sans-serif;
+	border:2px solid rgba(0,0,0,0.2);
+    border-radius: 12px;
+    position: relative;
+    transition: all 0.25s ease;
+}
+ 
+.content-select select:hover{
+	background: #B1E8CD;
+}
+ 
+/* 
+Creamos la fecha que aparece a la izquierda del select.
+Realmente este elemento es un cuadrado que sólo tienen
+dos bordes con color y que giramos con transform: rotate(-45deg);
+*/
+.content-select i{
+	position: absolute;
+	right: 20px;
+	top: calc(50% - 13px);
+	width: 16px;
+	height: 16px;
+	display: block;
+	border-left:4px solid #2AC176;
+	border-bottom:4px solid #2AC176;
+	transform: rotate(-45deg); /* Giramos el cuadrado */
+	transition: all 0.25s ease;
+}
+ 
+.content-select:hover i{
+	margin-top: 3px;
+}
