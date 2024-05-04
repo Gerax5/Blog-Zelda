@@ -34,7 +34,7 @@ const GamesInfo = ({id}) =>{
                 </div>
             </div>
             {isAdmin && (
-                <div style={{height:"90%", width:"10%", backgroundColor:"whitesmoke", display:"flex", flexDirection:"column",alignItems:"center"}}>
+                <div style={{height:"90%", width:"10%", display:"flex", flexDirection:"column",alignItems:"center"}}>
                     <button className='btnEdit'>Actualizar</button>
                     <button className='btnEdit'>Eliminar</button>
                 </div>

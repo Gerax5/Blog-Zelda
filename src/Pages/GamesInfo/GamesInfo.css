@@ -44,4 +44,8 @@
     width:90%;
     margin-top:20%;
     background-color: #ec9e51;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 20px;
+    color: #EDEECA;
 }

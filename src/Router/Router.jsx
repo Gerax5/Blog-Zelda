@@ -2,6 +2,7 @@ import GamesInfo from "../Pages/GamesInfo/GamesInfo"
 import Login from "../Pages/Login/Login"
 import MainScreen from "../Pages/MainScreen/MainScreen"
 import CharactersInfo from "../Pages/PageInfo/CharactersInfo"
+import CreatePost from "../Pages/CreatePost/CreatePost"
 
 
 const Router = ({ruta}) =>{
@@ -30,6 +31,8 @@ const Router = ({ruta}) =>{
             return <MainScreen />
         case "/admin":
             return <Login />
+        case "/Post":
+            return <CreatePost />
         default:
             return <MainScreen />
     }
