@@ -5,7 +5,7 @@ import CardCharacters from '../../Components/CardCharacters'
 import useApi from '../../Hooks/useApi'
 
 
-const MainScreen = () =>{
+const MainScreen = ({setRuta}) =>{
     //Games
   const [activeIndex, setActiveIndex] = useState(0)
   const [cards, setCards] = useState([])
@@ -108,7 +108,7 @@ const MainScreen = () =>{
 
   //Objects
   const {data:ObjectData, isLoading:ObjectLoading, error:ObjectError} = useApi('http://127.0.0.1:3000/object',options)
-  
+
   useEffect(() =>{
     if(ObjectError){
       console.log("Error",ObjectError)
@@ -185,6 +185,7 @@ const MainScreen = () =>{
               name={character.name_character}
               id={character.id_character}
               tipo={"Character"}
+              setRuta={setRuta}
               />
           ))}
           <button onClick={nextCharacter} className='btnSiguiente' style={{backgroundColor:"#494949", color:"white"}}>Siguiente</button>

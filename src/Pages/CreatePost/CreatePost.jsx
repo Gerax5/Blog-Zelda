@@ -18,6 +18,11 @@ const CreatePost = () =>{
         setTipo(event.target.value);
     }
 
+    const redirect = (ruta) =>{
+        window.history.pushState({}, "", ruta);
+        location.reload()
+    }
+
     const {data, isLoading, error } = useApi(options ? `http://127.0.0.1:3000/${tipo}`: null, options)
 
     const handlePressButton = () =>{

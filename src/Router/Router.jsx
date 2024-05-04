@@ -5,7 +5,7 @@ import CharactersInfo from "../Pages/PageInfo/CharactersInfo"
 import CreatePost from "../Pages/CreatePost/CreatePost"
 
 
-const Router = ({ruta}) =>{
+const Router = ({ruta, setRuta}) =>{
 
     if(ruta.includes('/Game')){
         console.log("ENTRO AQUI")
@@ -28,7 +28,7 @@ const Router = ({ruta}) =>{
 
     switch (ruta){
         case "/Home":
-            return <MainScreen />
+            return <MainScreen setRuta={setRuta}/>
         case "/admin":
             return <Login />
         case "/Post":

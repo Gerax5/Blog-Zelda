@@ -2,8 +2,12 @@ import { useEffect, useState } from 'react'
 import './GamesInfo.css'
 import useApi from '../../Hooks/useApi'
 import useAdmin from '../../Hooks/useAdmin';
+import { useParams } from 'react-router-dom';
 
-const GamesInfo = ({id}) =>{
+const GamesInfo = () =>{
+
+    let { id } = useParams();
+
     const options = {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },

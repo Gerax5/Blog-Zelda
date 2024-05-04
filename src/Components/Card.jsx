@@ -1,10 +1,11 @@
 import './Card.css'
+import { useNavigate } from 'react-router-dom';
 
 const Card = ({Image, titleGame, releaseDate,id}) =>{
 
+    let navigate = useNavigate()
     const redirect = (ruta) => {
-        window.history.pushState({}, "", ruta);
-        location.reload()
+        navigate(ruta)
     }
 
 
