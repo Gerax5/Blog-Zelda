@@ -5,7 +5,7 @@ import CardCharacters from '../../Components/CardCharacters'
 import useApi from '../../Hooks/useApi'
 import { context } from '../../Context/context'
 import PropTypes from 'prop-types';
-
+import MainScreenSkeleton from './MainScreenSkeleton'
 
 const MainScreen = ({setRuta}) =>{
 
@@ -37,7 +37,10 @@ const MainScreen = ({setRuta}) =>{
 
   const {data:gamesData, isLoading:gamesLoading, error:gamesError} = useApi('http://127.0.0.1:3000/games',options)
 
+
   useEffect(() =>{
+
+    console.log(gamesError)
     
     if(gamesError){
       console.log("Error",gamesError)
@@ -169,6 +172,23 @@ const MainScreen = ({setRuta}) =>{
       }
     });
   };
+
+  /*if(gamesError && gamesError.includes("500")){
+    return (
+      <div style={{height:"50%", width:"50%", alignSelf:"center", marginTop:"10%", display:"flex", flexDirection:"column"}}>
+        <div style={{height:"80%", width:"40%", alignSelf:"center"}}>
+          <img src='https://i.pinimg.com/originals/48/09/4e/48094e75e2902a89f7e155baf663c2f1.gif' style={{objectFit:"contain", height:"100%", width:"100%"}}></img>
+        </div>
+        <h1 style={{alignSelf:"center"}}>Error al conectar con el servidor</h1>
+      </div>
+    )
+  }*/
+
+  if(gamesLoading && gamesLoading==true){
+    return (
+      <MainScreenSkeleton />
+    )
+  }
 
   return (
     <div className='contanerTotal'>

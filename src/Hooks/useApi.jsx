@@ -21,6 +21,7 @@ function useApi(url, options) {
             console.log(data)
             setError(null);
             } catch (error) {
+                console.log("STATUUUSSS: ",error)
             setError(error.message);
             } finally {
             setIsLoading(false);
