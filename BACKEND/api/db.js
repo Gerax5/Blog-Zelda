@@ -115,7 +115,7 @@ async function getOneGame(gameID) {
 async function postGame(name, img, desc, date) {
   try {
     const [result] = await conn.query(`insert into games 
-    (name_game, img_game,date_released_game,content_games)
+    (name_game, img_game,date_released_game,description_game)
     values ('${name}', '${img}','${date}' ,'${desc}')`)
     return result
   } catch (e) {
@@ -126,7 +126,7 @@ async function postGame(name, img, desc, date) {
 async function updateGame(nameGame, imgGame, descriptionGame, dateGame, gameID) {
   try {
     const [result] = await conn.query(`update games set name_game = '${nameGame}',
-    img_game = '${imgGame}', date_released_game = '${dateGame}', content_games = '${descriptionGame}'
+    img_game = '${imgGame}', date_released_game = '${dateGame}', description_game = '${descriptionGame}'
     where id_game = ${gameID}`)
     return result
   } catch (e) {

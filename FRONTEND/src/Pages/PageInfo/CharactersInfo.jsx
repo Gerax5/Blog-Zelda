@@ -7,6 +7,8 @@ import useApi from "../../Hooks/useApi"
 import { useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 
+const API_URL = import.meta.env.VITE_API_URL
+
 const CharactersInfo = ({ruta}) =>{
 
     let { id } = useParams()
@@ -19,7 +21,7 @@ const CharactersInfo = ({ruta}) =>{
 
     const isAdmin = useAdmin()
 
-    const {data: delData, error: delError } = useApi(deleteOptions ? `http://127.0.0.1:3000/${ruta}/${id}`: null, deleteOptions)
+    const {data: delData, error: delError } = useApi(deleteOptions ? `${API_URL}${ruta}/${id}`: null, deleteOptions)
 
     useEffect(()=>{
         if(delError){
@@ -50,7 +52,7 @@ const CharactersInfo = ({ruta}) =>{
         headers: { 'Content-Type': 'application/json' },
     };
 
-    const {data } = useApi(`http://127.0.0.1:3000/${ruta}/${id}`,options)
+    const {data } = useApi(`${API_URL}${ruta}/${id}`,options)
 
     const onHandleUpdateItem = () =>{
         navigate(`/Update/${ruta}/${id}`)

@@ -6,6 +6,10 @@ import useApi from "../../Hooks/useApi";
 import { context } from "../../Context/context";
 import { useParams } from "react-router-dom";
 
+const API_URL = import.meta.env.VITE_API_URL
+const ENDPOINT_G = import.meta.env.VITE_ENDPOINT_G
+const ENDPOINT_C = import.meta.env.VITE_ENDPOINT_C
+
 const UpdatePost = () =>{
 
     const {setMarginTop} = useContext(context)
@@ -23,7 +27,7 @@ const UpdatePost = () =>{
         headers: { 'Content-Type': 'application/json' },
     };
 
-    const {data:updateDate, isLoading:updateIsLoading, error:updateError } = useApi(`http://127.0.0.1:3000/${tipo}/${id}`,optionsUpdate)
+    const {data:updateDate, isLoading:updateIsLoading, error:updateError } = useApi(`${API_URL}${tipo}/${id}`,optionsUpdate)
 
 
     useEffect(()=>{
@@ -34,7 +38,7 @@ const UpdatePost = () =>{
         if(!updateIsLoading){
             if(updateDate){
                 console.log(updateDate[0])
-                if(tipo == "games"){
+                if(tipo == ENDPOINT_G){
                     setName(updateDate[0] ? updateDate[0].name_game : '')
                     setDescription(updateDate[0] ? updateDate[0].content_games: '')
                     setImage(updateDate[0] ? updateDate[0].img_game : '')
@@ -42,10 +46,10 @@ const UpdatePost = () =>{
                         `${updateDate[0].date_released_game.year}/${updateDate[0].date_released_game.month}/${updateDate[0].date_released_game.day}`: ''
                     )
                 }else{
-                    setName(tipo == "character" && updateDate[0] ? updateDate[0].name_character : updateDate[0].name_object)
-                    setDescription(tipo == "character" && updateDate[0].description_character ? updateDate[0].description_character : updateDate[0].description_object)
+                    setName(tipo == ENDPOINT_C && updateDate[0] ? updateDate[0].name_character : updateDate[0].name_object)
+                    setDescription(tipo == ENDPOINT_C && updateDate[0].description_character ? updateDate[0].description_character : updateDate[0].description_object)
 
-                    setImage(tipo == "character" && updateDate[0] ? updateDate[0].img_character : updateDate[0].img_object)
+                    setImage(tipo == ENDPOINT_C && updateDate[0] ? updateDate[0].img_character : updateDate[0].img_object)
                 }
             }
           }
@@ -60,7 +64,7 @@ const UpdatePost = () =>{
     },[]) //eslint-disable-line react-hooks/exhaustive-deps
     
 
-    const {data, error } = useApi(options ? `http://127.0.0.1:3000/${tipo}/${id}`: null, options)
+    const {data, error } = useApi(options ? `${API_URL}${tipo}/${id}`: null, options)
 
     const handlePressButton = () =>{
         if(name != '' && description != '' && image != ''){

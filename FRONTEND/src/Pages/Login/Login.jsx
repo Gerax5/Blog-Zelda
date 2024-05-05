@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import './Login.css'
 import useApi from '../../Hooks/useApi';
 
+const API_URL = import.meta.env.VITE_API_URL
+const ENDPOINT_L = import.meta.env.VITE_ENDPOINT_L
+
 const Login = () => {
 
     let navigate = useNavigate()
@@ -11,7 +14,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [options, setOptions] = useState(null);
 
-    const {data, error } = useApi(options ? 'http://127.0.0.1:3000/login': null, options)
+    const {data, error } = useApi(options ? `${API_URL}${ENDPOINT_L}`: null, options)
 
     const validateLogin = () =>{
         setOptions({

@@ -7,6 +7,14 @@ import { context } from '../../Context/context'
 import PropTypes from 'prop-types';
 import MainScreenSkeleton from './MainScreenSkeleton'
 
+const API_URL = import.meta.env.VITE_API_URL
+
+const ENDPOINT_G = import.meta.env.VITE_ENDPOINT_G
+
+const ENDPOINT_C = import.meta.env.VITE_ENDPOINT_C
+
+const ENDPOINT_O = import.meta.env.VITE_ENDPOINT_O
+
 const MainScreen = ({setRuta}) =>{
 
   const {setMarginTop} = useContext(context)
@@ -19,7 +27,7 @@ const MainScreen = ({setRuta}) =>{
     }
   },[]) //eslint-disable-line react-hooks/exhaustive-deps
   
-    //Games
+  //Games
   const [activeIndex, setActiveIndex] = useState(0)
   const [cards, setCards] = useState([])
   //Characters
@@ -35,7 +43,7 @@ const MainScreen = ({setRuta}) =>{
     headers: { 'Content-Type': 'application/json' },
   };
 
-  const {data:gamesData, isLoading:gamesLoading, error:gamesError} = useApi('http://127.0.0.1:3000/games',options)
+  const {data:gamesData, isLoading:gamesLoading, error:gamesError} = useApi(`${API_URL}${ENDPOINT_G}`,options)
 
 
   useEffect(() =>{
@@ -73,7 +81,7 @@ const MainScreen = ({setRuta}) =>{
   };
 
   //Data Characters
-  const {data:characterData, isLoading:CharacterLoading, error:CharacterError} = useApi('http://127.0.0.1:3000/character',options)
+  const {data:characterData, isLoading:CharacterLoading, error:CharacterError} = useApi(`${API_URL}${ENDPOINT_C}`,options)
 
   useEffect(() =>{
     if(CharacterError){
@@ -124,7 +132,7 @@ const MainScreen = ({setRuta}) =>{
   };
 
   //Objects
-  const {data:ObjectData, isLoading:ObjectLoading, error:ObjectError} = useApi('http://127.0.0.1:3000/object',options)
+  const {data:ObjectData, isLoading:ObjectLoading, error:ObjectError} = useApi(`${API_URL}${ENDPOINT_O}`,options)
 
   useEffect(() =>{
     if(ObjectError){
@@ -185,6 +193,12 @@ const MainScreen = ({setRuta}) =>{
   }*/
 
   if(gamesLoading && gamesLoading==true){
+    return (
+      <MainScreenSkeleton />
+    )
+  }
+
+  if(gamesError){
     return (
       <MainScreenSkeleton />
     )

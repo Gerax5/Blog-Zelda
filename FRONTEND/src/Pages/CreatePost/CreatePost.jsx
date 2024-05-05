@@ -5,6 +5,11 @@ import './CreatePost.css'
 import useApi from "../../Hooks/useApi";
 import { context } from "../../Context/context";
 
+const API_URL = import.meta.env.VITE_API_URL
+const ENDPOINT_G = import.meta.env.VITE_ENDPOINT_G
+const ENDPOINT_C = import.meta.env.VITE_ENDPOINT_C
+const ENDPOINT_O = import.meta.env.VITE_ENDPOINT_O
+
 const CreatePost = () =>{
 
     const {setMarginTop} = useContext(context)
@@ -18,7 +23,7 @@ const CreatePost = () =>{
     },[]) //eslint-disable-line react-hooks/exhaustive-deps
     
     const isAdmin = useAdmin()
-    const [tipo, setTipo] = useState('Character')
+    const [tipo, setTipo] = useState(ENDPOINT_C)
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
@@ -30,7 +35,7 @@ const CreatePost = () =>{
         setTipo(event.target.value);
     }
 
-    const {data, error } = useApi(options ? `http://127.0.0.1:3000/${tipo}`: null, options)
+    const {data, error } = useApi(options ? `${API_URL}${tipo}`: null, options)
 
     const handlePressButton = () =>{
         if(name != '' && description != '' && image != ''){
@@ -82,9 +87,9 @@ const CreatePost = () =>{
                 <div className="tipoPost">
                     <p className="subtitlePost"> Ingrese el tipo de elemento que quiere agregar</p>
                     <select value={tipo} onChange={handleChangeSelection} className="content-select">
-                        <option value="character">Personaje</option>
-                        <option value="games">Juego</option>
-                        <option value="object">Objeto</option>
+                        <option value={ENDPOINT_C}>Personaje</option>
+                        <option value={ENDPOINT_G}>Juego</option>
+                        <option value={ENDPOINT_O}>Objeto</option>
                     </select>
                 </div>
                 <div className="tipoPost">
@@ -99,7 +104,7 @@ const CreatePost = () =>{
                     <p className="subtitlePost"> Ingrese el url de la imagen</p>
                     <input className="inputTextValues" type="text" value={image} onChange={(e) => setImage(e.target.value)}/>
                 </div>
-                {tipo == "games" && (
+                {tipo == ENDPOINT_G && (
                     <div className="tipoPost">
                         <p className="subtitlePost"> Ingrese la fecha en la que salio el juego</p>
                         <input className="inputTextValues" type="text" value={date} onChange={(e) => setDate(e.target.value)} />

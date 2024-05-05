@@ -5,6 +5,9 @@ import useAdmin from '../../Hooks/useAdmin';
 import { useParams, useNavigate } from 'react-router-dom';
 import { context } from '../../Context/context';
 
+const API_URL = import.meta.env.VITE_API_URL
+const ENDPOINT_G = import.meta.env.VITE_ENDPOINT_G
+
 const GamesInfo = () =>{
 
     let { id } = useParams()
@@ -13,14 +16,14 @@ const GamesInfo = () =>{
     const [deleteOptions, setDeleteOptions] = useState(null)
     const [key, setKey] = useState('')
 
-    const {data: delData, error: delError } = useApi(deleteOptions ? `http://127.0.0.1:3000/games/${id}`: null, deleteOptions)
+    const {data: delData, error: delError } = useApi(deleteOptions ? `${API_URL}${ENDPOINT_G}/${id}`: null, deleteOptions)
 
     const options = {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
     };
 
-    const {data} = useApi(`http://127.0.0.1:3000/games/${id}`,options)
+    const {data} = useApi(`${API_URL}${ENDPOINT_G}/${id}`,options)
 
     useEffect(()=>{
         if(delError){
