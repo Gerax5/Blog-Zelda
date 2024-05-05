@@ -46,7 +46,6 @@ app.post('/character', validateDataPostCharacters, async (req, res) => {
       descriptionCharacter,
       imgCharacter] = [req.body.name, req.body.description, req.body.img]
     const messages = await createCharacter(nameCharacter, descriptionCharacter, imgCharacter)
-    console.log(messages)
     res.status(200).json(messages)
   } catch (error) {
     res.status(500).json({ message: 'error in character creation' })
@@ -56,7 +55,6 @@ app.post('/character', validateDataPostCharacters, async (req, res) => {
 app.get('/character', async (req, res) => {
   try {
     const messages = await getAllCharacters()
-    console.log(messages)
     res.status(200).json(messages)
   } catch (error) {
     res.status(500).json({ message: 'error retrieving the characters' })
@@ -95,7 +93,6 @@ app.put('/character/:characterID', validateDataUpdateCharacters, async (req, res
       imgCharacter,
       characterID,
     )
-    console.log(messages)
     res.status(200).json(messages)
   } catch (error) {
     res.status(500).json({ message: 'error updating the character' })
@@ -165,7 +162,7 @@ app.get('/games', async (req, res) => {
       name_game: game.name_game,
       img_game: game.img_game,
       date_released_game: formatDate(game.date_released_game),
-      content_games: game.content_games,
+      description_game: game.description_game,
     }))
     res.status(200).json(modifyGames)
   } catch (error) {
@@ -182,7 +179,7 @@ app.get('/games/:gameID', async (req, res) => {
       name_game: game.name_game,
       img_game: game.img_game,
       date_released_game: formatDate(game.date_released_game),
-      content_games: game.content_games,
+      description_game: game.description_game,
     }))
     res.status(200).json(modifyGames)
   } catch (error) {
@@ -191,14 +188,12 @@ app.get('/games/:gameID', async (req, res) => {
 })
 
 app.post('/games', async (req, res) => {
-  console.log("ENTRO")
   try {
     const [nameGame,
       imgGame,
       descriptionGame,
       dateGame] = [req.body.name, req.body.img, req.body.description, req.body.dateRelease]
     const messages = await postGame(nameGame, imgGame, descriptionGame, dateGame)
-    console.log(messages)
     res.status(200).json(messages)
   } catch (error) {
     res.status(500).json({ message: 'error posting the game' })

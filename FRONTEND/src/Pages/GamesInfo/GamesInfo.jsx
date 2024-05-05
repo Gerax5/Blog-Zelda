@@ -82,7 +82,7 @@ const GamesInfo = () =>{
                 <h2 style={{height:"5%"}} className='containerTextGame'>Release Date: {data[0].date_released_game.day}/{data[0].date_released_game.month}/{data[0].date_released_game.year}</h2>
                 <h2 style={{height:"5%"}} className='containerTextGame'>Acerca de:</h2>
                 <div className='containerTextGame'>
-                    <p>{data[0].content_games}</p>
+                    <p>{data[0].description_game}</p>
                 </div>
             </div>
             {isAdmin && (

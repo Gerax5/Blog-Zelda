@@ -211,14 +211,21 @@ const MainScreen = ({setRuta}) =>{
           <div className='whiteLine'></div>
           <div className='containerGames'>
             <button onClick={prevCard} className='btnAnterior'>Anterior</button>
-                {gamesLoading == false  && cards[activeIndex] && (
-                  <Card
-                    Image={cards[activeIndex].img_game}
-                    releaseDate={cards[activeIndex].date_released_game.year}
-                    titleGame={cards[activeIndex].name_game}
-                    id={cards[activeIndex].id_game}
-                  />
-                )}
+            {cards && cards.length > 0 ? (
+                <Card
+                  Image={cards[activeIndex].img_game}
+                  releaseDate={cards[activeIndex].date_released_game.year}
+                  titleGame={cards[activeIndex].name_game}
+                  id={cards[activeIndex].id_game}
+                />
+              ):(
+              <div style={{height:"80%", width:"50%", display:"flex", flexDirection:"column"}}>
+                <div style={{height:"70%", width:"50%", alignSelf:"center"}}>
+                  <img src='https://i.pinimg.com/originals/48/09/4e/48094e75e2902a89f7e155baf663c2f1.gif' style={{objectFit:"contain", height:"100%", width:"100%"}}/>
+                </div>
+                <h1 style={{alignSelf:"center", color:"white"}}>No hay datos aun</h1>
+              </div>
+            )}
             <button onClick={nextCard} className='btnSiguiente'>Siguiente</button>
           </div>
       </div>
@@ -227,16 +234,26 @@ const MainScreen = ({setRuta}) =>{
         <div className='whiteLine'></div>
         <div className='containerGames' style={{marginLeft:"5%", justifyContent:"space-around"}}>
           <button onClick={prevCharacter} className='btnAnterior' style={{backgroundColor:"#494949", color:"white"}}>Anterior</button>
-          {cards[activeIndex] && characters.slice(activeIndexCharacters, activeIndexCharacters + 3).map(character => (
-            <CardCharacters 
-              key={character.id_character}
-              image={character.img_character} 
-              name={character.name_character}
-              id={character.id_character}
-              tipo={"Character"}
-              setRuta={setRuta}
-              />
-          ))}
+          {characters && characters.length > 0 ? (
+            characters.slice(activeIndexCharacters, activeIndexCharacters + 3).map(character => (
+              <CardCharacters 
+                key={character.id_character}
+                image={character.img_character} 
+                name={character.name_character}
+                id={character.id_character}
+                tipo={"Character"}
+                setRuta={setRuta}
+                />
+            ))
+          ): (
+            <div style={{height:"80%", width:"50%", display:"flex", flexDirection:"column"}}>
+              <div style={{height:"70%", width:"50%", alignSelf:"center"}}>
+                <img src='https://i.pinimg.com/originals/48/09/4e/48094e75e2902a89f7e155baf663c2f1.gif' style={{objectFit:"contain", height:"100%", width:"100%"}}/>
+              </div>
+              <h1 style={{alignSelf:"center", color:"white"}}>No hay datos aun</h1>
+            </div>
+          )}
+          
           <button onClick={nextCharacter} className='btnSiguiente' style={{backgroundColor:"#494949", color:"white"}}>Siguiente</button>
         </div> 
       </div>
@@ -245,18 +262,27 @@ const MainScreen = ({setRuta}) =>{
         <div className='whiteLine'></div>
         <div className='containerGames' style={{marginLeft:"5%", justifyContent:"space-around"}}>
           <button onClick={prevObject} className='btnAnterior'>Anterior</button>
-          {objects.slice(activeIndexObject, activeIndexObject + 3).map(object => (
-            <CardCharacters 
-              key={object.id_object}
-              image={object.img_object} 
-              name={object.name_object} 
-              id={object.id_object}
-              background={'#ec9e51'} 
-              borderColor={'#494949'}
-              marginTopImage={'20%'}
-              tipo={"Object"}
+          {objects && objects.length > 0 ? (
+            objects.slice(activeIndexObject, activeIndexObject + 3).map(object => (
+              <CardCharacters 
+                key={object.id_object}
+                image={object.img_object} 
+                name={object.name_object} 
+                id={object.id_object}
+                background={'#ec9e51'} 
+                borderColor={'#494949'}
+                marginTopImage={'20%'}
+                tipo={"Object"}
               />
-          ))}
+            ))
+          ) : (
+            <div style={{height:"80%", width:"50%", display:"flex", flexDirection:"column"}}>
+              <div style={{height:"70%", width:"50%", alignSelf:"center"}}>
+                <img src='https://i.pinimg.com/originals/48/09/4e/48094e75e2902a89f7e155baf663c2f1.gif' style={{objectFit:"contain", height:"100%", width:"100%"}}/>
+              </div>
+              <h1 style={{alignSelf:"center", color:"white"}}>No hay datos aun</h1>
+            </div>
+          )}
           <button onClick={nextObject} className='btnSiguiente'>Siguiente</button>
         </div>
       </div>

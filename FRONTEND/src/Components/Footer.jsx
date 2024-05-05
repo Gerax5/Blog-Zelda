@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 const Footer = ({marginTop})=>{
     return (
         <div className="Footer" style={{marginTop:marginTop}}>
-            Informacion
+            <div className='dataFooter'>
+                <h2 style={{color:"white", textAlign:"center"}}>Creado por Gerax</h2>
+            </div>
         </div>
     )
 }
