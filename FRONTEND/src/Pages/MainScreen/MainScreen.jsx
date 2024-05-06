@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext} from 'react'
+import { useNavigate } from 'react-router-dom'
 import '../../App.css'
 import Card from '../../Components/Card'
 import CardCharacters from '../../Components/CardCharacters'
@@ -16,6 +17,15 @@ const ENDPOINT_C = import.meta.env.VITE_ENDPOINT_C
 const ENDPOINT_O = import.meta.env.VITE_ENDPOINT_O
 
 const MainScreen = ({setRuta}) =>{
+
+  let navigate = useNavigate()
+
+  useEffect(() =>{
+    let ruta = window.location.pathname
+    if(ruta == "/admin"){
+      navigate(ruta)
+    }
+  })
 
   const {setMarginTop} = useContext(context)
 

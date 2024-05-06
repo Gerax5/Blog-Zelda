@@ -7,8 +7,7 @@ import CreatePost from "../Pages/CreatePost/CreatePost"
 import UpdatePost from '../Pages/update/UpdatePost'
 
 const ENDPOINT_C = import.meta.env.VITE_ENDPOINT_C
-
-const ENDPOINT_O = import.meta.env.VITE_ENDPOINT_C
+const ENDPOINT_O = import.meta.env.VITE_ENDPOINT_O
 
 function AppRouter() {
 
