@@ -105,7 +105,6 @@ app.get('/object', async (req, res) => {
     const messages = await getAllObjects()
     res.status(200).json(messages)
   } catch (error) {
-    console.log(error)
     res.status(500).json({ message: 'error retrieving the object' })
   }
 })
@@ -167,7 +166,6 @@ app.get('/games', async (req, res) => {
     }))
     res.status(200).json(modifyGames)
   } catch (error) {
-    console.log(error)
     res.status(500).json({ message: 'error retrieving the object' })
   }
 })
@@ -196,7 +194,6 @@ app.post('/games', async (req, res) => {
       descriptionGame,
       dateGame] = [req.body.name, req.body.img, req.body.description, req.body.dateRelease]
     const messages = await postGame(nameGame, imgGame, descriptionGame, dateGame)
-    console.log(messages)
     res.status(200).json(messages)
   } catch (error) {
     res.status(500).json({ message: 'error posting the game' })
