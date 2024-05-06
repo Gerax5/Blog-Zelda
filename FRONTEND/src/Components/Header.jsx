@@ -8,12 +8,11 @@ function Header(){
     const handleLogOut = () => {
         localStorage.setItem('sesionActiva', 'false')
         localStorage.setItem('token', "")
-        location.reload()
+        window.location.href = "/Home";
     }
 
     const post = () => {
-        window.history.pushState({}, "", "/Post")
-        location.reload()
+        window.location.href = "/Post";
     }
 
     console.log(isAdmin)
