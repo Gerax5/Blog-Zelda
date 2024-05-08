@@ -16,9 +16,9 @@ Nos dirigimos a la carpeta  ```` FRONTEND ```` en donde se tiene que realizan el
 Con esto el proyecto estara listo para ser utilizado.  
 
 ### Nube
-El FrontEnd esta alojado en: https://blog-zelda.vercel.app/  
+El FrontEnd esta alojado en: http://uwu-guate.site:3601/
   
-El BackEnd esta alojado en: 
+El BackEnd esta alojado en: http://uwu-guate.site:3005/
 
 ## Uso
 Una vez inciamos el proyecto encontraremos distintas rutas:
